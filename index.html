@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Հայկ & Լիաննա — 08.11.2026</title>
+<script>document.documentElement.classList.add('js');</script>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Noto+Sans+Armenian:wght@300;400;500;600&family=Noto+Serif+Armenian:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ivory:#FBF9F4; --cream:#F6F1E7; --beige:#E8DFD0; --blush:#F3E3E0;
+  --blush-deep:#E4C6C0; --champagne:#EAD5B7; --gold:#C2A15A; --gold-deep:#A98B45;
+  --ink:#4A4038; --ink-soft:#837869;
+  --serif:'Cormorant Garamond','Noto Serif Armenian',serif;
+  --sans:'Noto Sans Armenian',system-ui,sans-serif;
+  --script:'Great Vibes',cursive;
+  --shadow:0 24px 60px rgba(76,60,40,.12);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:92px}
+body{font-family:var(--sans);background:var(--ivory);color:var(--ink);font-weight:300;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+[hidden]{display:none!important}
+
+/* ═══════════════════════════════════════════
+   ENVELOPE ANIMATION STYLES (FASTER)
+═══════════════════════════════════════════ */
+#envelope-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: radial-gradient(circle at center, #fdfbf7 0%, #e8dfd0 100%);
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s;
+    perspective: 1500px;
+}
+#envelope-overlay.hidden {
+    opacity: 0; visibility: hidden; pointer-events: none;
+}
+
+.envelope-container {
+    position: relative;
+    width: 450px; height: 320px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+@media(max-width: 500px) {
+    .envelope-container { width: 320px; height: 220px; }
+}
+
+.envelope-container:hover { transform: translateY(-5px); }
+
+.envelope {
+    position: absolute; bottom: 0; width: 100%; height: 100%;
+    background: #fff;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    z-index: 2; overflow: hidden;
+}
+.envelope::before { 
+    content: ''; position: absolute; top: 0; left: 0;
+    border-left: 225px solid transparent; border-right: 225px solid transparent;
+    border-bottom: 160px solid #f4eee1; z-index: 4;
+}
+.envelope::after { 
+    content: ''; position: absolute; bottom: 0; left: 0;
+    border-left: 225px solid transparent; border-right: 225px solid transparent;
+    border-bottom: 160px solid #eaddc5; opacity: 0.5; z-index: 3;
+}
+@media(max-width: 500px) {
+    .envelope::before, .envelope::after {
+        border-left-width: 160px; border-right-width: 160px; border-bottom-width: 110px;
+    }
+}
+
+.letter {
+    position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px;
+    background: #fff; border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    z-index: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+    padding: 20px;
+}
+.letter h2 { font-family: var(--serif); font-size: 2.5rem; color: var(--ink); margin-bottom: 5px; }
+.letter p { font-family: var(--sans); font-size: 0.9rem; color: var(--gold-deep); letter-spacing: 2px; text-transform: uppercase; }
+.letter .amp { font-family: var(--script); color: var(--gold); font-size: 2.5rem; }
+
+.lid {
+    position: absolute; top: 0; left: 0; width: 100%; height: 0;
+    border-left: 225px solid transparent; border-right: 225px solid transparent;
+    border-top: 170px solid #e6dac3;
+    transform-origin: top;
+    transition: transform 0.4s ease-in-out, z-index 0.2s; 
+    z-index: 5;
+}
+@media(max-width: 500px) {
+    .lid { border-left-width: 160px; border-right-width: 160px; border-top-width: 120px; }
+}
+
+.seal-area {
+    position: absolute; top: 140px; left: 50%; transform: translateX(-50%);
+    z-index: 6; display: flex; flex-direction: column; align-items: center;
+    transition: transform 0.3s ease, opacity 0.3s;
+}
+@media(max-width: 500px) { .seal-area { top: 95px; } }
+
+.open-btn {
+    background: var(--gold); color: #fff;
+    padding: 12px 25px; border-radius: 50px;
+    font-family: var(--sans); font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; font-size: 0.85rem;
+    box-shadow: 0 5px 15px rgba(169, 139, 69, 0.4);
+    animation: btnPulse 2s infinite; border: 2px solid #fff;
+    white-space: nowrap;
+}
+
+@keyframes btnPulse {
+    0% { transform: scale(1); background-color: var(--gold); box-shadow: 0 0 0 0 rgba(194, 161, 90, 0.7); }
+    50% { transform: scale(1.05); background-color: var(--gold-deep); box-shadow: 0 0 0 10px rgba(194, 161, 90, 0); }
+    100% { transform: scale(1); background-color: var(--gold); box-shadow: 0 0 0 0 rgba(194, 161, 90, 0); }
+}
+
+.envelope-container.open .lid { transform: rotateX(180deg); z-index: 0; }
+.envelope-container.open .seal-area { transform: translateX(-50%) scale(0); opacity: 0; }
+.envelope-container.open .letter { transform: translateY(-180px); z-index: 3; }
+@media(max-width: 500px) { .envelope-container.open .letter { transform: translateY(-120px); } }
+
+/* ═══════════════════════════════════════════
+   MAIN SITE STYLES
+═══════════════════════════════════════════ */
+.site-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,5vw,60px);transition:all .45s var(--ease);}
+.site-header.scrolled{padding:13px clamp(20px,5vw,60px);background:rgba(251,249,244,.95);backdrop-filter:blur(12px);box-shadow:0 6px 30px rgba(76,60,40,.08);border-bottom:1px solid rgba(194,161,90,.18);}
+.monogram{font-family:var(--serif);font-size:1.15rem;letter-spacing:.08em;color:var(--ink);z-index:101}
+.monogram .amp{font-family:var(--script);color:var(--gold);font-size:1.2em}
+.nav-links{display:flex;gap:clamp(20px,3.5vw,44px)}
+.nav-links a{font-size:.78rem;font-weight:400;letter-spacing:.26em;color:var(--ink-soft);text-transform:uppercase;transition:color .3s}
+.nav-links a:hover{color:var(--gold-deep)}
+.burger{display:none;z-index:101;background:none;border:none;width:44px;height:44px;cursor:pointer;position:relative}
+.burger span{position:absolute;left:10px;right:10px;height:1.6px;background:var(--ink);transition:all .4s var(--ease)}
+.burger span:nth-child(1){top:17px} .burger span:nth-child(2){top:26px}
+body.menu-open .burger span:nth-child(1){top:21px;transform:rotate(45deg)}
+body.menu-open .burger span:nth-child(2){top:21px;transform:rotate(-45deg)}
+
+.music-btn{position:fixed;bottom:25px;right:25px;z-index:200;width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.9);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,0.1);transition:transform 0.3s}
+.music-btn:hover{transform:scale(1.1)}
+.music-btn svg{width:20px;height:20px;fill:var(--gold-deep)}
+.music-btn.playing {animation: pulse 2s infinite;}
+@keyframes pulse {0%{box-shadow:0 0 0 0 rgba(194,161,90, 0.4)} 70%{box-shadow:0 0 0 10px rgba(194,161,90, 0)} 100%{box-shadow:0 0 0 0 rgba(194,161,90, 0)}}
+
+.hero{position:relative; min-height:100vh; display:flex; flex-direction: column; justify-content: center; align-items: center; text-align:center; padding: 120px 20px 60px; background: linear-gradient(to bottom, #fff, var(--cream)); overflow:hidden;}
+.hero-text-container { margin-bottom: 50px; z-index: 2; }
+.hero-phrase{ font-family:var(--serif); font-style:italic; font-size:clamp(1.1rem,3vw,1.5rem); color:var(--ink-soft); margin-bottom:15px; }
+.hero-names{ font-family:var(--serif); font-weight:600; color:var(--ink); font-size:clamp(3rem,10vw,6rem); line-height:1.1; margin:10px 0 25px; }
+.hero-names .amp{color:var(--gold); font-family:var(--script); font-size:1.2em;}
+.hero-date{ display:inline-flex; align-items:center; gap:18px; font-family:var(--sans); font-weight:600; font-size:clamp(1rem,2.5vw,1.2rem); color:var(--gold-deep); border: 1px solid var(--gold); padding: 8px 25px; border-radius: 50px; background: rgba(255,255,255,0.5); }
+
+.hero-image-wrapper { position: relative; width: 100%; max-width: 600px; height: 750px; margin: 0 auto; z-index: 2; }
+.hero-img-frame { width: 100%; height: 100%; border-radius: 300px 300px 20px 20px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.2); border: 10px solid #fff; position: relative; }
+.hero-img-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+.up{animation:fadeUp 1.2s var(--ease) both;animation-delay:var(--d,0s)}
+
+.count-section{background:var(--cream);border-top:1px solid rgba(194,161,90,.22);border-bottom:1px solid rgba(194,161,90,.22);padding:clamp(40px,6vw,60px) 20px;}
+.count-grid{display:grid;grid-template-columns:repeat(4,1fr);max-width:760px;margin:0 auto;text-align:center;}
+.count-unit{padding:6px 4px}
+.count-unit + .count-unit{border-left:1px solid rgba(194,161,90,.25)}
+.count-num{display:block;font-family:var(--serif);font-weight:600;font-size:clamp(2.5rem,8vw,4.5rem);line-height:1.1;color:var(--ink);}
+.count-label{display:block;margin-top:8px;font-size:clamp(.6rem,1.8vw,.8rem);font-weight:600;letter-spacing:.2em;color:var(--gold-deep);text-transform:uppercase;}
+
+.section-pad{padding:clamp(60px,8vw,100px) 20px;}
+.overline{font-size:.75rem;font-weight:600;letter-spacing:.3em;color:var(--gold-deep);text-align:center;margin-bottom:10px;text-transform:uppercase;}
+.section-title{font-family:var(--serif);font-weight:600;text-align:center;font-size:clamp(2rem,5vw,3rem);color:var(--ink);margin-bottom:30px;}
+.divider{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 auto 40px}
+.divider span{width:60px;height:1px;background:var(--gold)}
+.divider i{width:7px;height:7px;border:1px solid var(--gold);background:var(--champagne);transform:rotate(45deg)}
+
+.invite-card{max-width:720px;margin:0 auto;text-align:center}
+.invite-lead{font-family:var(--serif);font-size:clamp(1.3rem,3.5vw,1.8rem);line-height:1.6;color:var(--ink);font-weight:500;}
+
+.timeline{position:relative;max-width:900px;margin:0 auto;}
+.t-item{display:flex;flex-direction:column;gap:30px;margin-bottom:60px;align-items:center;}
+.t-card{background:#FFFDF8;border:1px solid rgba(194,161,90,.25);border-radius:20px;box-shadow:var(--shadow);padding:30px;width:100%;max-width:500px;text-align:center;}
+.t-time{display:inline-block;padding:.4em 1.2em;border:1px solid var(--gold);border-radius:999px;font-family:var(--serif);font-weight:700;font-size:1.2rem;letter-spacing:.15em;color:var(--gold-deep);margin-bottom:15px;}
+.t-card h3{font-family:var(--serif);font-weight:700;font-size:1.8rem;color:var(--ink);margin-bottom:10px;}
+.t-place{font-weight:600;color:var(--ink);font-size:1.1rem;margin-bottom:5px;}
+.t-addr{font-size:.95rem;color:var(--ink-soft);margin-bottom:20px;}
+
+.photo-frame{ width:100%; max-width:450px; height:550px; border-radius:225px 225px 20px 20px; overflow:hidden; position:relative; box-shadow:0 20px 40px rgba(0,0,0,0.15); border: 6px solid #fff; }
+.photo-frame img{ width:100%; height:100%; object-fit:cover; object-position: top center; transition:transform 0.5s ease; }
+
+@media(min-width:768px){
+    .t-item{flex-direction:row; justify-content:center; gap:50px;}
+    .t-item:nth-child(even){flex-direction:row-reverse;}
+    .t-card{text-align:left; max-width:420px;}
+    .photo-frame{max-width:380px; height:500px; border-radius:190px 190px 20px 20px;}
+    .hero { flex-direction: row; justify-content: center; gap: 80px; text-align: left; }
+    .hero-text-container { margin-bottom: 0; max-width: 500px; }
+    .hero-image-wrapper { height: 800px; max-width: 650px; }
+}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 30px;border-radius:999px;border:1px solid var(--gold);color:var(--gold-deep);font-size:.9rem;font-weight:600;letter-spacing:.1em;transition:all .3s; text-transform:uppercase;width:100%;}
+.btn:hover{background:var(--gold);color:#fff;}
+
+.closing{text-align:center;background:linear-gradient(var(--cream),var(--blush));padding:80px 20px;position:relative;overflow:hidden;}
+.closing-names{font-family:var(--serif);font-size:clamp(2.5rem,8vw,5rem);color:var(--ink);margin:20px 0;}
+
+.js .reveal{opacity:0;transform:translateY(30px);transition:all 1s var(--ease);}
+.js .reveal.in{opacity:1;transform:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+
+#hearts{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+.heart{position:absolute;top:-10%;color:var(--blush-deep);opacity:0;animation:fall linear infinite;}
+@keyframes fall{0%{transform:translateY(-10vh) rotate(0);opacity:0}10%{opacity:0.7}90%{opacity:0.7}100%{transform:translateY(110vh) rotate(360deg);opacity:0}}
+
+@media(max-width:860px){
+    .burger{display:block}
+    .nav-links{position:fixed;inset:0;background:var(--ivory);flex-direction:column;align-items:center;justify-content:center;gap:30px;opacity:0;visibility:hidden;transition:.4s;z-index:99;}
+    body.menu-open .nav-links{opacity:1;visibility:visible}
+    .nav-links a{font-size:1.2rem}
+    .photo-frame{height:450px; border-radius:225px 225px 20px 20px;}
+    .hero-image-wrapper { height: 600px; max-width: 90%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ENVELOPE OVERLAY -->
+<div id="envelope-overlay">
+    <div class="envelope-container" id="envelope">
+        <div class="lid"></div>
+        <div class="envelope"></div>
+        <div class="letter">
+            <p ><br>Հրավեր</p>
+            <h2>Հայկ  <span class="amp">&</span> Լիաննա</h2>
+            <p style="margin-top:10px; font-size:0.8rem; color:#888;">08 • 11 • 2026</p>
+        </div>
+        <div class="seal-area">
+            <div class="open-btn">ԲԱՑԵԼ ՀՐԱՎԵՐԸ</div>
+        </div>
+    </div>
+</div>
+
+<!-- AUDIO -->
+<audio id="bg-music" loop>
+    <source src="1.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="music-btn" aria-label="Play Music">
+    <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+</button>
+
+<header class="site-header" id="site-header">
+  <a class="monogram" href="#home">Լ <span class="amp">&</span> Հ</a>
+  <nav class="nav-links" id="nav-links">
+    <a href="#home">Գլխավոր</a>
+    <a href="#program">Ծրագիր</a>
+    <a href="#venue">Վայրը</a>
+  </nav>
+  <button class="burger" id="burger"><span></span><span></span></button>
+</header>
+
+<main>
+    <section class="hero" id="home">
+        <div class="hero-text-container">
+            <p class="hero-phrase up" style="--d:.2s">«Մեր սիրո պատմության նոր էջը»</p>
+            <h1 class="hero-names up" style="--d:.4s">Հայկ <span class="amp">&</span> Լիաննա</h1>
+            <div class="up" style="--d:.6s">
+                <span class="hero-date">08 • 11 • 2026</span>
+            </div>
+        </div>
+        <div class="hero-image-wrapper up" style="--d:.8s">
+            <div class="hero-img-frame">
+                <img src="couple.jpg" alt="Lianna and Hayk" onerror="this.src='https://via.placeholder.com/600x800/F3E3E0/A98B45?text=Hero+Photo'">
+            </div>
+        </div>
+    </section>
+
+    <section class="count-section">
+        <div class="reveal">
+            <p class="overline">Սպասում ենք</p>
+            <div class="count-grid" id="cd-grid">
+                <div class="count-unit"><span class="count-num" id="cd-d">00</span><span class="count-label">Օր</span></div>
+                <div class="count-unit"><span class="count-num" id="cd-h">00</span><span class="count-label">Ժամ</span></div>
+                <div class="count-unit"><span class="count-num" id="cd-m">00</span><span class="count-label">Րոպե</span></div>
+                <div class="count-unit"><span class="count-num" id="cd-s">00</span><span class="count-label">Վայրկյան</span></div>
+            </div>
+            <p id="cd-done" hidden style="text-align:center; font-family:var(--serif); font-size:2rem; color:var(--gold-deep); margin-top:20px;">«Այսօր մեր մեծ օրն է 🤍»</p>
+        </div>
+    </section>
+
+    <section class="section-pad">
+        <div class="invite-card reveal">
+            <p class="overline">Հրավեր</p>
+            <h2 class="section-title">Սիրելի՛ հարազատներ և ընկերներ</h2>
+            <div class="divider"><span></span><i></i><span></span></div>
+            <p class="invite-lead">
+                Երկու սրտի հանդիպումը մեզ բերեց այն օրվան, երբ որոշեցինք միավորել մեր ճակատագրերը։ 
+                Անչափ ուրախ կլինենք, եթե դուք՝ մեզ ամենամոտ և սիրելի մարդիկ, կիսեիք մեզ հետ այս հուզիչ և կարևոր օրը։
+            </p>
+            <div style="margin-top:30px; font-family:var(--script); font-size:3rem; color:var(--gold)">Lianna & Hayk</div>
+        </div>
+    </section>
+
+    <section class="section-pad" id="program" style="background:var(--cream)">
+        <div class="reveal">
+            <p class="overline">Ծրագիր</p>
+            <h2 class="section-title">Օրվա ընթացքը</h2>
+            <div class="divider"><span></span><i></i><span></span></div>
+        </div>
+        <div class="timeline">
+            <!-- New Item: Bride's House -->
+            <div class="t-item reveal">
+                <div class="photo-frame">
+                    <img src="hero.jpg" alt="Հարսի տուն" onerror="this.src='https://via.placeholder.com/450x550/E8DFD0/A98B45?text=Bride+House'">
+                </div>
+                <div class="t-card">
+                    <span class="t-time">12:00</span>
+                    <h3>Հարսի տուն</h3>
+                    <p class="t-addr">Սիրով սպասում ենք Ձեզ հարսի տանը</p>
+                 </div>
+            </div>
+
+            <div class="t-item reveal">
+                <div class="photo-frame">
+                    <img src="church.jpg" alt="Hayravank Monastery" onerror="this.src='https://via.placeholder.com/450x550/E8DFD0/A98B45?text=Church+Photo'">
+                </div>
+                <div class="t-card">
+                    <span class="t-time">14:00</span>
+                    <h3>Եկեղեցական արարողություն</h3>
+                    <p class="t-place">Սևանի Հայրավանք</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Hayravank%20Monastery%2C%20Sevan%2C%20Armenia" target="_blank" class="btn">Քարտեզ</a>
+                </div>
+            </div>
+            <div class="t-item reveal" id="venue">
+                <div class="photo-frame">
+                    <img src="couple1.jpg" alt="Lianna and Hayk" onerror="this.src='https://via.placeholder.com/450x550/F3E3E0/A98B45?text=Couple+Photo'">
+                </div>
+                <div class="t-card">
+                    <span class="t-time">17:30</span>
+                    <h3>Հարսանեկան հանդիսություն</h3>
+                    <p class="t-place">«Գինաց» ռեստորանային համալիր</p>
+                    <p class="t-addr">Կոտայքի մարզ, ք. Չարենցավան, Գայի 3</p>
+                    <a href="https://maps.app.goo.gl/sWMVVnvqNtyev4DN8" target="_blank" class="btn">Քարտեզ</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="closing">
+        <div class="reveal">
+            <p class="overline">Սպասում ենք ձեզ</p>
+            <p style="font-family:var(--serif); font-size:1.6rem; font-style:italic; max-width:600px; margin:0 auto; color:var(--ink-soft);">«Սիրով սպասում ենք ձեզ մեր կյանքի ամենակարևոր օրվան»</p>
+            <h2 class="closing-names">Հայկ <span class="amp" style="font-family:var(--script); color:var(--gold);">&</span> Լիաննա</h2>
+            <div class="hero-date" style="border-color:var(--gold); color:var(--gold-deep); margin-top:20px; background:transparent;"><span></span>08 • 11 • 2026<span></span></div>
+        </div>
+    </section>
+</main>
+
+<footer style="text-align:center; padding:20px; background:var(--blush); color:var(--ink-soft); font-size:0.8rem; letter-spacing:2px;">
+    L & H — 2026
+</footer>
+
+<div id="hearts"></div>
+
+<script>
+(function(){
+    // 1. ENVELOPE & MUSIC LOGIC (FASTER)
+    const envelopeOverlay = document.getElementById('envelope-overlay');
+    const envelope = document.getElementById('envelope');
+    const audio = document.getElementById('bg-music');
+    const btn = document.getElementById('music-btn');
+    let playing = false;
+    
+    audio.volume = 0.5;
+
+    function openEnvelope() {
+        envelope.classList.add('open');
+        
+        audio.play().then(() => {
+            playing = true;
+            btn.classList.add('playing');
+        }).catch(e => console.log("Audio error", e));
+
+        // Սպասման ժամանակը կրճատված է մինչև 1.2 վայրկյան
+        setTimeout(() => {
+            envelopeOverlay.classList.add('hidden');
+        }, 1200); 
+        
+        envelope.removeEventListener('click', openEnvelope);
+    }
+
+    envelope.addEventListener('click', openEnvelope);
+
+    function toggleMusic() {
+        if(playing) {
+            audio.pause();
+            btn.classList.remove('playing');
+            btn.style.opacity = "0.6";
+        } else {
+            audio.play();
+            btn.classList.add('playing');
+            btn.style.opacity = "1";
+        }
+        playing = !playing;
+    }
+
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if(!envelopeOverlay.classList.contains('hidden')) {
+            openEnvelope();
+        } else {
+            toggleMusic();
+        }
+    });
+
+    // 2. HEADER SCROLL
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // 3. MOBILE MENU
+    const burger = document.getElementById('burger');
+    burger.addEventListener('click', () => {
+        document.body.classList.toggle('menu-open');
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+        document.body.classList.remove('menu-open');
+    }));
+
+    // 4. COUNTDOWN
+    const target = new Date(2026, 10, 8, 0, 0, 0);
+    const els = { d: document.getElementById('cd-d'), h: document.getElementById('cd-h'), m: document.getElementById('cd-m'), s: document.getElementById('cd-s') };
+    const grid = document.getElementById('cd-grid');
+    const done = document.getElementById('cd-done');
+
+    function updateCountdown() {
+        const now = new Date();
+        const diff = target - now;
+        if(diff <= 0) { grid.style.display = 'none'; done.hidden = false; return; }
+        els.d.textContent = String(Math.floor(diff / 86400000)).padStart(2,'0');
+        els.h.textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+        els.m.textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+        els.s.textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // 5. REVEAL ON SCROLL
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('in'); });
+    }, {threshold: 0.1});
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 6. FLOATING HEARTS
+    const heartsContainer = document.getElementById('hearts');
+    const colors = ['#E4C6C0', '#C2A15A', '#F3E3E0'];
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = Math.random() * 3 + 7 + 's';
+        heart.style.fontSize = Math.random() * 10 + 15 + 'px';
+        heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+        heartsContainer.appendChild(heart);
+        setTimeout(() => { heart.remove(); }, 10000);
+    }
+    setInterval(createHeart, 500);
+
+})();
+</script>
+</body>
+</html>
